@@ -1,3 +1,6 @@
+import style from './page.module.css';
+
+
 export default function Tennis() {
 	return (
 		<section className='max-w-3xl mx-auto p-6 px-6 sm:px-12 md:px-28'>
@@ -8,7 +11,7 @@ export default function Tennis() {
 					<li>Основные удары</li>
 					<li>Подача</li>
 					<li>Правила игры</li>
-					<li>Стратегия на корте</li>
+					<li className={style.custom}>Стратегия на корте</li>
 				</ul>
 				<p className='text-gray-700'>Курс подходит для любителей и новичков.</p>
 			</div>
