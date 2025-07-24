@@ -1,8 +1,13 @@
 // server
+interface Product {
+	id: number;
+	title: string;
+	price: number;
+}
 
 export default async function ProductsServer() {
 	// Get products
-	const products = await fetch('https://fakestoreapi.com/products').then(res => res.json());
+	const products: Product[] = await fetch('https://fakestoreapi.com/products').then(res => res.json());
 
 	return (
 		<div className='max-w-3xl mx-auto p-6'>
@@ -10,7 +15,7 @@ export default async function ProductsServer() {
 
 			{/* Get first 5 products */}
 			<ul className='list-disc pl-6 space-y-2'>
-				{products.slice(0, 5).map((product: any) => (
+				{products.slice(0, 5).map((product: Product) => (
 					<li key={product.id}>
 						<strong>{product.title}</strong> – {product.price}$
 					</li>
