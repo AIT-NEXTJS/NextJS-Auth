@@ -7,7 +7,7 @@ export default function SportsLayout({
 }>) {
 	return (
 		<>
-			<nav className='flex justify-center items-center gap-8 font-medium sticky top-[56px] z-10 bg-blue-950 text-gray-100 py-3'>
+			<nav className='flex justify-center items-center gap-8 font-medium sticky top-[56px] z-10 py-3   bg-sky-50 text-gray-800  dark:bg-slate-900 dark:text-gray-300'>
 				<Link href='/sports/football' className='hover:text-orange-300 transition'>
 					Футбол
 				</Link>

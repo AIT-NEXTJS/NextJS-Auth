@@ -11,6 +11,7 @@ export default function Home() {
 						</a>
 					</p>
 				</div>
+				<p className='bg-background:amber text-foreground dark:bg-orange-400'>Hello Next</p>
 			</section>
 		</div>
 	);

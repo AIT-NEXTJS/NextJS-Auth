@@ -1,6 +1,9 @@
 // server-version/page.tsx
 
+import UserCard from '@/components/UserCard/UserCard';
 import { User } from '@/types';
+import { revalidateTag } from 'next/cache';
+import Link from 'next/link';
 
 // Компонент по умолчанию серверный (в Next.js 13+ это поведение по умолчанию)
 const UsersServerVersion = async () => {
@@ -21,7 +24,6 @@ const UsersServerVersion = async () => {
 
 		// ручное обновление: next: {tags: ['users']}, внутри фетча
 		// revalidateTag: ['users']
-
 	});
 
 	// Если ответ не OK (например, 404 или 500) — выбрасываем ошибку
@@ -32,15 +34,26 @@ const UsersServerVersion = async () => {
 	// Преобразуем ответ в JSON и сохраняем в переменную users
 	const users: User[] = await res.json();
 
-	// Выводим в терминал сервера — клиент этого не увидит
-	// console.log(users); // ← можно включить для отладки
+	// console.log(users);
 
-	// Возвращаем JSX-разметку: список пользователей
 	return (
-		<div>
-			{users.map((user: User) => (
-				<li key={user.id}>{user.name}</li>
-			))}
+		<div className='max-w-5xl mx-auto p-6'>
+			<h1 className='text-2xl font-bold mb-6 text-center text-gray-800'>Список пользователей</h1>
+
+			<div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 justify-items-center'>
+				{users.map(user => (
+					<UserCard user={user} showBackLink={false} key={user.id}/>
+				))}
+
+				{/* <button
+				type='button'
+				onClick={() => {
+					revalidateTag('users');
+				}}
+			>
+				Обновить данные пользователей с сейчас - пример
+			</button> */}
+			</div>
 		</div>
 	);
 };
