@@ -26,6 +26,10 @@ export default function NavBar() {
 			<Link href='/users/server-version' className='hover:text-amber-300'>
 				Users server
 			</Link>
+
+			<Link href='/users/server-version-v2' className='hover:text-amber-300 -ml-5'>
+				(v2)
+			</Link>
 			{/* Products */}
 			<Link href='/products/client-version' className='hover:text-lime-300'>
 				Products client
