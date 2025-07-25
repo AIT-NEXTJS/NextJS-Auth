@@ -2,8 +2,8 @@ import { User } from '@/types';
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
 
-export default async function UserInfo({ params }: { params: Promise<{ id: string }> }) {
-	const id = (await params).id;
+export default async function UserInfo({ params }: { params: { id: string } }) {
+	const id = params.id;
 	const res = await fetch(`https://api.escuelajs.co/api/v1/users/${id}`);
 	console.log('ID: ', id);
 	if (!res.ok) {
