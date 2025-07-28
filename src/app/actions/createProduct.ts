@@ -10,6 +10,10 @@ export async function createProduct(formData: FormData) {
   const categoryId = Number(formData.get('categoryId'));
   const image = formData.get('image')?.toString(); // Get the image URL, not required
 
+
+
+
+
   try { //check validation
     const res = await fetch('https://api.escuelajs.co/api/v1/products/', {
       method: 'POST',
@@ -27,7 +31,7 @@ export async function createProduct(formData: FormData) {
       throw new Error('API request failed');
     }
 
-
+  // сохранение в базу
     revalidateTag('products');
     redirect('/products');
 
