@@ -43,12 +43,18 @@ export default function NavBar() {
 			<Link href='/products-v2/server-version' className='hover:text-lime-300 -ml-5'>
 				(v2)
 			</Link>
-			<Link href={'/categories/create'} className='hover:text-amber-300'>
-				Create category
+
+			<Link href={'/products-v2/create'} className='hover:text-amber-300  -ml-5'>
+				(create)
 			</Link>
+
 			<Link href={'/categories'} className='hover:text-amber-300'>
 				Categories
 			</Link>
+			<Link href={'/categories/create'} className='hover:text-amber-300  -ml-5'>
+				(create)
+			</Link>
+
 			<ThemeToggles />
 		</nav>
 	);
