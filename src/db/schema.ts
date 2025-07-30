@@ -12,4 +12,5 @@ export const eventsTable = pgTable("events", {
   id: integer().primaryKey().generatedAlwaysAsIdentity(),
   name: varchar({ length: 255 }).notNull().unique(),
   description: varchar({ length: 255 }).notNull(),
+description2: varchar({ length: 255 }).default(''),
 }); // Create the "events" table

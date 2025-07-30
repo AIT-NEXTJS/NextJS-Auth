@@ -1,0 +1,16 @@
+.counter {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 20;
+	min-width: 400px;
+	padding: 20px;
+	background-color: rgb(171, 215, 215);
+	border: 2px solid rgb(32, 32, 81);
+	max-width: 600px;
+}
+.value {
+	font-size: 24px;
+	font-weight: bold;
+	color: rgb(27, 27, 80);
+}

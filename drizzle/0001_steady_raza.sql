@@ -1,0 +1,1 @@
+ALTER TABLE "events" ADD COLUMN "description2" varchar(255) NOT NULL;
