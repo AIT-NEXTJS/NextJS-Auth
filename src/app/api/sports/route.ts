@@ -2,11 +2,27 @@ import { db } from "@/db";
 import { sportsTable } from "@/db/schema";
 import { NextRequest, NextResponse } from "next/server";
 import z from "zod"; // z
-export const runtime = "nodejs"; // netlify compatible
+
+import { getServerSession } from "next-auth";
+import { authOptions } from "../auth/[...nextauth]/route";
+
+// export const runtime = "nodejs"; // netlify compatible
 
 const SportInsertSchema = z.object({ // z
   title: z.string().min(3, "Title should be at least 3 characters long"), // z
-  image: z.string().url("Image must be a valid URL"), // z
+  //image: z.string().url("Image must be a valid URL"), // z
+ image: z.string().refine(
+    (val) => {
+      try {
+        new URL(val);
+        return true;
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      } catch (err) {
+        return false;
+      }
+    },
+    { message: "Invalid URL of image" }
+  ),
   description: z.string() // z
     .max(250, "Description should be less than 250 characters") // z
     .refine((val) => val !== "Sport is not for me", { message: "Life is a sport — give it a few more chances ;)" }), // z
@@ -38,7 +54,17 @@ export async function GET() {
 }
 
 export async function POST(req: NextRequest) {
+
   try { // z
+
+const session = await getServerSession();
+if (!session) {
+  return NextResponse.json(
+    { error: "Unauthorized" },
+    { status: 401 }
+  ); 
+}
+
     const body = await req.json(); // z
     const { title, image, description } = SportInsertSchema.parse(body); // z
 

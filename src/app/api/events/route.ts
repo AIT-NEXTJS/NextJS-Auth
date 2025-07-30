@@ -1,9 +1,14 @@
 import { db } from "@/db";
 import { eventsTable } from "@/db/schema";
 import { eq } from 'drizzle-orm';
+import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
 import z from "zod";
 import { de } from "zod/locales";
+
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+
+
 
 const EventInsertSchema = z.object({
   name: z.string().min(3, "Minimal length is 3"),
@@ -35,6 +40,24 @@ export async function POST(req: NextRequest) {
 
 try {
 
+const session = await getServerSession(authOptions);
+
+if (!session) {
+  return NextResponse.json(
+    { error: "Unauthorized" },
+    { status: 401 }
+  ); 
+}
+
+// 401 - Unauthorized
+// 403 - Forbidden
+// 404 - Not found
+// 500 - Internal server error
+// 200 - OK
+// 201 - Created
+// 400 - Bad request
+
+
   const body = await req.json();
 
 
@@ -47,7 +70,7 @@ try {
   return NextResponse.json(events,{status: 201});
 
  } catch (error) {
-
+console.error("ERROR:", error);
  if (error instanceof z.ZodError) 
 {
       return NextResponse.json(

@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import React from 'react';
 import ThemeToggles from '../ThemeToggles.tsx/ThemeToggles';
+import AuthButton from '../AuthButton/AuthButton';
 
 export default function NavBar() {
 	return (
@@ -54,6 +55,8 @@ export default function NavBar() {
 			<Link href={'/categories/create'} className='hover:text-amber-300  -ml-5'>
 				(create)
 			</Link>
+
+			<AuthButton />
 
 			<ThemeToggles />
 		</nav>

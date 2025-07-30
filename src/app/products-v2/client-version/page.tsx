@@ -2,17 +2,17 @@
 
 import ProductCard from '@/components/ProductCard/ProductCard';
 import { Product } from '@/types';
+import { useSession } from 'next-auth/react'; // authorized?
 import { useEffect, useState } from 'react';
 
 export default function ProductClientVersion() {
 	const [products, setProducts] = useState<Product[]>([]);
 	const [loading, setLoading] = useState(true);
 
-	
+	const { data: session, status } = useSession(); // authorized?
 
 	useEffect(() => {
 		fetchProducts().finally(() => setLoading(false));
-
 	}, []);
 
 	async function fetchProducts() {
@@ -28,7 +28,10 @@ export default function ProductClientVersion() {
 		<div>
 			{loading && <p className='text-yellow-400 text-center text-xl mb-4'>Loading...</p>}
 			<ul>
-				{products.map(product => (
+				
+{session && <p className='text-center m-6'>User {session.user.name} is logged in.</p>}
+				
+{products.map(product => (
 					<ProductCard product={product} key={product.id} />
 				))}
 			</ul>
