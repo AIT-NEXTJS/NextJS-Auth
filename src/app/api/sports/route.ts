@@ -12,9 +12,31 @@ const SportInsertSchema = z.object({ // z
     .refine((val) => val !== "Sport is not for me", { message: "Life is a sport — give it a few more chances ;)" }), // z
 }); // z
 
+// export async function GET() {
+//   const sports = await db.select().from(sportsTable);
+//   return NextResponse.json(sports);
+// }
+
 export async function GET() {
-  const sports = await db.select().from(sportsTable);
-  return NextResponse.json(sports);
+  try {
+    const sports = await db.select().from(sportsTable);
+    return NextResponse.json(sports);
+  } catch (error: unknown) {
+ 
+    const err = error instanceof Error ? error : new Error("Unknown error");
+
+    console.error("❌ GET /api/sports error:", err);
+
+    return NextResponse.json(
+      {
+        error: "Database fetch failed",
+        name: err.name,
+        message: err.message,
+        stack: err.stack,
+      },
+      { status: 500 }
+    );
+  }
 }
 
 export async function POST(req: NextRequest) {
