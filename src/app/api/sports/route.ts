@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from "next/server";
 import z from "zod"; // z
 
 import { getServerSession } from "next-auth";
-import { authOptions } from "../auth/[...nextauth]/route";
+import { authOptions } from '@/lib/authOptions';
 
 // export const runtime = "nodejs"; // netlify compatible
 

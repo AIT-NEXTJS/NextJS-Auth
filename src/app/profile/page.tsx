@@ -1,5 +1,5 @@
 import { getServerSession } from 'next-auth';
-import { authOptions } from '../api/auth/[...nextauth]/route';
+import { authOptions } from '@/lib/authOptions';
 import Image from 'next/image';
 
 export default async function Profile() {
@@ -12,7 +12,8 @@ export default async function Profile() {
 	return (
 		<div className='flex items-center justify-center flex-col gap-4 p-6'>
 			<h2 className='text-2xl font-bold'>User profile</h2>
-			<pre>{JSON.stringify(session?.user, null, 2)}</pre>
+			{/* <pre>{JSON.stringify(session?.user, null, 2)}</pre> */}
+			<p>{session?.user?.name}</p>
 			<p>{session?.user?.email}</p>
 			<Image src={typeof session?.user?.image === 'string' ? session.user.image : '/fallback.png'} alt='avatar' width={200} height={200} unoptimized />
 		</div>

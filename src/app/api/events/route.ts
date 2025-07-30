@@ -6,7 +6,7 @@ import { NextRequest, NextResponse } from "next/server";
 import z from "zod";
 import { de } from "zod/locales";
 
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from '@/lib/authOptions';
 
 
 
