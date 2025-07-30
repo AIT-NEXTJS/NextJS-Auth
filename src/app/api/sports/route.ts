@@ -2,6 +2,7 @@ import { db } from "@/db";
 import { sportsTable } from "@/db/schema";
 import { NextRequest, NextResponse } from "next/server";
 import z from "zod"; // z
+export const runtime = "nodejs"; // netlify compatible
 
 const SportInsertSchema = z.object({ // z
   title: z.string().min(3, "Title should be at least 3 characters long"), // z
@@ -27,13 +28,12 @@ export async function POST(req: NextRequest) {
       .returning();
 
     return NextResponse.json(sport, { status: 201 }); // z
-  } catch (error) { // z
-    if (error instanceof z.ZodError) { // z
-      return NextResponse.json({ error: "Invalid input", details: error.issues }, { status: 400 }); // z
-    }
-
-    return NextResponse.json({ error: "Internal server error" }, { status: 500 }); // z
+ } catch (error) {
+  console.error("POST /api/sports error:", error); 
+  if (error instanceof z.ZodError) {
+    return NextResponse.json({ error: "Invalid input", details: error.issues }, { status: 400 });
   }
+  return NextResponse.json({ error: "Internal server error", details: String(error) }, { status: 500 });
 }
 
 
