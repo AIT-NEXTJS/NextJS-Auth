@@ -2,7 +2,7 @@ import { db } from "@/db";
 import { sportsTable } from "@/db/schema";
 import { NextRequest, NextResponse } from "next/server";
 import z from "zod"; // z
-export const runtime = "nodejs"; // netlify compatible
+//export const runtime = "nodejs"; // netlify compatible
 
 const SportInsertSchema = z.object({ // z
   title: z.string().min(3, "Title should be at least 3 characters long"), // z
