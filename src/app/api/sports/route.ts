@@ -25,8 +25,6 @@ export async function GET() {
  
     const err = error instanceof Error ? error : new Error("Unknown error");
 
-    console.error("❌ GET /api/sports error:", err);
-
     return NextResponse.json(
       {
         error: "Database fetch failed",

@@ -51,7 +51,7 @@ export async function GET() {
     return NextResponse.json(
       {
         step: 'DRIZZLE SELECT 1',
-        status: '❌ Failed basic query',
+        status: ' Failed basic query',
         message: error.message,
       },
       { status: 500 }
